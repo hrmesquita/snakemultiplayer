@@ -9,7 +9,7 @@ public class Settings {
     // VARs
 
     // Fixed
-    public static final int paddingLef = 10;
+    public static final int paddingLeft = 10;
     public static final int paddingTop = 10;
 
     public static final int cellSize = 30;

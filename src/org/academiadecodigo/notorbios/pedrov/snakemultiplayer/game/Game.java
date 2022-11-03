@@ -55,12 +55,12 @@ public class Game implements KeyboardHandler {
             sockets = new Sockets();
         }
 
-        loading = new Picture(Settings.paddingLef + (Settings.numColumns / 2) * Settings.cellSize - 239, Settings.paddingTop + (Settings.numRows / 2) * Settings.cellSize - 29, "titles/loading.png");
+        loading = new Picture(Settings.paddingLeft + (Settings.numColumns / 2) * Settings.cellSize - 239, Settings.paddingTop + (Settings.numRows / 2) * Settings.cellSize - 29, "titles/loading.png");
         loading.draw();
 
         Settings.fixWindowGame();
 
-        creatMap();
+        createMap();
 
         Settings.centerWindowGame();
 
@@ -69,7 +69,7 @@ public class Game implements KeyboardHandler {
         loading.delete();
 
         if (Settings.isP1) {
-            Picture waitingP2 = new Picture(Settings.paddingLef + (Settings.numColumns / 2) * Settings.cellSize - 170, Settings.paddingTop + (Settings.numRows / 2) * Settings.cellSize - 105, "titles/waitingPlayer2.png");
+            Picture waitingP2 = new Picture(Settings.paddingLeft + (Settings.numColumns / 2) * Settings.cellSize - 170, Settings.paddingTop + (Settings.numRows / 2) * Settings.cellSize - 105, "titles/waitingPlayer2.png");
             waitingP2.draw();
 
             Frame.getFrames()[Settings.indexJFrame].paintAll(Frame.getFrames()[Settings.indexJFrame].getGraphics());
@@ -88,7 +88,7 @@ public class Game implements KeyboardHandler {
 
         snakeP2 = new Snake(false);
 
-        creatTitles();
+        createTitles();
 
         if (Settings.isP1) {
             KeyboardSettings.startKeyboard(this);
@@ -103,25 +103,25 @@ public class Game implements KeyboardHandler {
         }
     }
 
-    private void creatMap() {
+    private void createMap() {
         Picture wall;
 
         // WALL TOP && BOTTOM
         int yBottom = Settings.paddingTop + Settings.numRows * Settings.cellSize - Settings.cellSize;
 
         for (int x = 0; x < Settings.numColumns; x++) {
-            wall = new Picture(Settings.paddingLef + x * Settings.cellSize, Settings.paddingTop, "map/wall.jpg");
+            wall = new Picture(Settings.paddingLeft + x * Settings.cellSize, Settings.paddingTop, "map/wall.jpg");
             wall.draw();
 
-            wall = new Picture(Settings.paddingLef + x * Settings.cellSize, yBottom, "map/wall.jpg");
+            wall = new Picture(Settings.paddingLeft + x * Settings.cellSize, yBottom, "map/wall.jpg");
             wall.draw();
         }
 
         // WALL LEFT && RIGHT
-        int xRight = Settings.paddingLef + Settings.numColumns * Settings.cellSize - Settings.cellSize;
+        int xRight = Settings.paddingLeft + Settings.numColumns * Settings.cellSize - Settings.cellSize;
 
         for (int x = 1; x < Settings.numRows - 1; x++) {
-            wall = new Picture(Settings.paddingLef, Settings.paddingTop + x * Settings.cellSize, "map/wall.jpg");
+            wall = new Picture(Settings.paddingLeft, Settings.paddingTop + x * Settings.cellSize, "map/wall.jpg");
             wall.draw();
 
             wall = new Picture(xRight, Settings.paddingTop + x * Settings.cellSize, "map/wall.jpg");
@@ -129,7 +129,7 @@ public class Game implements KeyboardHandler {
         }
 
         // BACKGROUND
-        Rectangle background = new Rectangle(Settings.paddingLef + Settings.cellSize, Settings.paddingTop + Settings.cellSize, Settings.cellSize * (Settings.numColumns - 2), Settings.cellSize * (Settings.numRows - 2));
+        Rectangle background = new Rectangle(Settings.paddingLeft + Settings.cellSize, Settings.paddingTop + Settings.cellSize, Settings.cellSize * (Settings.numColumns - 2), Settings.cellSize * (Settings.numRows - 2));
         background.setColor(Color.BLACK);
         background.fill();
 
@@ -137,14 +137,14 @@ public class Game implements KeyboardHandler {
         loading.draw();
     }
 
-    private void creatTitles() {
-        gameStateMessage = new Picture(Settings.paddingLef + (Settings.numColumns / 2) * Settings.cellSize - 170, Settings.paddingTop + (Settings.numRows / 2) * Settings.cellSize - 105, (Settings.isP1) ? "titles/pressSpaceToPlay.png" : "titles/waitingPlayer1Start.png");
+    private void createTitles() {
+        gameStateMessage = new Picture(Settings.paddingLeft + (Settings.numColumns / 2) * Settings.cellSize - 170, Settings.paddingTop + (Settings.numRows / 2) * Settings.cellSize - 105, (Settings.isP1) ? "titles/pressSpaceToPlay.png" : "titles/waitingPlayer1Start.png");
         gameStateMessage.draw();
 
-        titleP1 = new Picture(Settings.paddingLef, Settings.paddingTop, (Settings.isP1) ? "titles/topYou.png" : "titles/topP1.png");
+        titleP1 = new Picture(Settings.paddingLeft, Settings.paddingTop, (Settings.isP1) ? "titles/topYou.png" : "titles/topP1.png");
         titleP1.draw();
 
-        titleP2 = new Picture(Settings.paddingLef + Settings.numColumns * Settings.cellSize - 240, Settings.paddingTop + Settings.numRows * Settings.cellSize - 30, (Settings.isP1) ? "titles/bottomP2.png" : "titles/bottomYou.png");
+        titleP2 = new Picture(Settings.paddingLeft + Settings.numColumns * Settings.cellSize - 240, Settings.paddingTop + Settings.numRows * Settings.cellSize - 30, (Settings.isP1) ? "titles/bottomP2.png" : "titles/bottomYou.png");
         titleP2.draw();
     }
 
@@ -188,7 +188,7 @@ public class Game implements KeyboardHandler {
                     try {
                         Thread.sleep(Settings.velocity);
                     } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
                 }
             }
@@ -297,11 +297,11 @@ public class Game implements KeyboardHandler {
         // </If the snake attacks itself>
 
         // <Player 1 - Crashed into the walls>
-        if (snakeP1.getX() == Settings.paddingLef) {
+        if (snakeP1.getX() == Settings.paddingLeft) {
             snakeP1end = true;
         } else if (snakeP1.getY() == Settings.paddingTop) {
             snakeP1end = true;
-        } else if (snakeP1.getX() == Settings.paddingLef + (Settings.numColumns - 1) * Settings.cellSize) {
+        } else if (snakeP1.getX() == Settings.paddingLeft + (Settings.numColumns - 1) * Settings.cellSize) {
             snakeP1end = true;
         } else if (snakeP1.getY() == Settings.paddingTop + (Settings.numRows - 1) * Settings.cellSize) {
             snakeP1end = true;
@@ -309,11 +309,11 @@ public class Game implements KeyboardHandler {
         // </Player 1 - Crashed into the walls>
 
         // <Player 2 - Crashed into the walls>
-        if (snakeP2.getX() == Settings.paddingLef) {
+        if (snakeP2.getX() == Settings.paddingLeft) {
             snakeP2end = true;
         } else if (snakeP2.getY() == Settings.paddingTop) {
             snakeP2end = true;
-        } else if (snakeP2.getX() == Settings.paddingLef + (Settings.numColumns - 1) * Settings.cellSize) {
+        } else if (snakeP2.getX() == Settings.paddingLeft + (Settings.numColumns - 1) * Settings.cellSize) {
             snakeP2end = true;
         } else if (snakeP2.getY() == Settings.paddingTop + (Settings.numRows - 1) * Settings.cellSize) {
             snakeP2end = true;
@@ -338,7 +338,7 @@ public class Game implements KeyboardHandler {
             while (!canCreate) {
                 canCreate = true;
 
-                x = Settings.paddingLef + Settings.cellSize + new Random().nextInt(numColumns) * Settings.cellSize;
+                x = Settings.paddingLeft + Settings.cellSize + new Random().nextInt(numColumns) * Settings.cellSize;
                 y = Settings.paddingTop + Settings.cellSize + new Random().nextInt(numRows) * Settings.cellSize;
 
                 if (snakeP2.wasAttacked(x, y) || snakeP1.wasAttacked(x, y)) {
@@ -380,10 +380,10 @@ public class Game implements KeyboardHandler {
             endLocal.draw();
         }
 
-        Picture curtain = new Picture(Settings.paddingLef, Settings.paddingTop, Settings.numColumns == 22 ? "blackTransparent20x10.png" : Settings.numColumns == 27 ? "blackTransparent25x15.png" : Settings.numColumns == 32 ? "blackTransparent30x20.png" : "blackTransparent35x25.png");
+        Picture curtain = new Picture(Settings.paddingLeft, Settings.paddingTop, Settings.numColumns == 22 ? "blackTransparent20x10.png" : Settings.numColumns == 27 ? "blackTransparent25x15.png" : Settings.numColumns == 32 ? "blackTransparent30x20.png" : "blackTransparent35x25.png");
         curtain.draw();
 
-        gameStateMessage = new Picture(Settings.paddingLef + (Settings.numColumns / 2) * Settings.cellSize - 250, Settings.paddingTop + (Settings.numRows / 2) * Settings.cellSize - 125, "titles/" + ((Settings.isP1 && snakeP1end || !Settings.isP1 && snakeP2end) ? "lose.png" : "win.png"));
+        gameStateMessage = new Picture(Settings.paddingLeft + (Settings.numColumns / 2) * Settings.cellSize - 250, Settings.paddingTop + (Settings.numRows / 2) * Settings.cellSize - 125, "titles/" + ((Settings.isP1 && snakeP1end || !Settings.isP1 && snakeP2end) ? "lose.png" : "win.png"));
         gameStateMessage.draw();
 
         Text score = new Text(gameStateMessage.getX() + 383, gameStateMessage.getY() + 177, String.valueOf((Settings.isP1) ? snakeP1.getScore() : snakeP2.getScore()));
@@ -394,7 +394,7 @@ public class Game implements KeyboardHandler {
         try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         if (gameState == 2) {

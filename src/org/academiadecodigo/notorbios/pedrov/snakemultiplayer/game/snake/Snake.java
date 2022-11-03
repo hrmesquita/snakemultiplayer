@@ -28,7 +28,7 @@ public class Snake {
         // Proportional: One head/body for every 5 cells
         snake = new Picture[((Settings.numColumns - 2) / 5 + (Settings.numRows - 2) / 5) / 2];
 
-        int xHead = Settings.paddingLef;
+        int xHead = Settings.paddingLeft;
         int y = Settings.paddingTop;
         String imgHead = "snake/";
 

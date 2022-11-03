@@ -32,7 +32,7 @@ public class MainMenu {
     private JComboBox cboxBoard;
     private JLabel txtSpeed;
     private JComboBox cboxSpeed;
-    private JLabel txtIPAdress;
+    private JLabel txtIPAddress;
     private JButton btnPlay;
 
     private boolean waitingOrPlay;
@@ -41,7 +41,7 @@ public class MainMenu {
     public MainMenu() {
         getIPs();
 
-        creatWindow();
+        createWindow();
 
         // BUTTON RULES
         btnRules.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -126,7 +126,7 @@ public class MainMenu {
         }
     }
 
-    private void creatWindow() {
+    private void createWindow() {
         JFrame window = new JFrame("Snake MultiPlayer");
 
         window.setIconImage(new ImageIcon(Objects.requireNonNull(Settings.class.getResource("/icon.png"))).getImage());
@@ -175,13 +175,13 @@ public class MainMenu {
             // PRIVATE IP
             String ip = InetAddress.getLocalHost().getHostAddress();
 
-            txtIPAdress.setText("IP Adress: " + ip);
+            txtIPAddress.setText("IP Address: " + ip);
             inputServer.setText(ip.substring(0, ip.lastIndexOf(".") + 1));
 
             // PUBLIC IP
-            //txtIPAdress.setText("IP Adress: " + (new BufferedReader(new InputStreamReader((new URL("http://checkip.amazonaws.com/")).openStream()))).readLine());
+            //txtIPAddress.setText("IP Address: " + (new BufferedReader(new InputStreamReader((new URL("http://checkip.amazonaws.com/")).openStream()))).readLine());
         } catch (UnknownHostException e) {
-            txtIPAdress.setText("IP Adress: No connection");
+            txtIPAddress.setText("IP Address: No connection");
         }
     }
 
